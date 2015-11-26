@@ -1,0 +1,92 @@
+// Helper for playing with pseudo element
+// $width: width of the pseudo element.
+// $height: height of the pseudo element.
+// $content: when playing with pseudo element, you mainly use `content: ""` (default value).
+// $position: when playing with pseudo element, you mainly use `position: absolute` (default value).
+// $display: when playing with pseudo element, you mainly use `display: block` (default value).
+@mixin pseudo-element($content: "", $position: absolute, $display: block) {
+    content: $content;
+    position: $position;
+    display: $display;
+}
+
+@mixin background-cover() {
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+  -ms-behavior: url("/background-size.min.htc");
+}
+
+// INPUT PLACEHOLDER STYLING
+// @include placeholder { color:red; }
+
+$placeholders: '-webkit-input-placeholder',
+               '-moz-placeholder',
+               '-ms-input-placeholder';
+
+@mixin input-placeholder {
+  @each $placeholder in $placeholders {
+    @if $placeholder == "-webkit-input-placeholder" {
+      &::#{$placeholder} {
+        @content;
+      }
+    }
+    @else if $placeholder == "-moz-placeholder" {
+      // FF 18-
+      &:#{$placeholder} {
+        @content;
+      }
+
+      // FF 19+
+      &::#{$placeholder} {
+        @content;
+      }
+    }
+    @else {
+      &:#{$placeholder} {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@mixin hide-text {
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+  }
+}
+
+// Convert pixels to ems
+// eg. for a relational value of 12px write em(12) when the parent is 16px
+// if the parent is another value say 24px write em(12, 24)
+
+$em-base: 14px;
+@function strip-units($val) {
+  @return ($val / ($val * 0 + 1));
+}
+
+@function em($pxval, $base: $em-base) {
+  @if not unitless($pxval) {
+      $pxval: strip-units($pxval);
+  }
+  @if not unitless($base) {
+      $base: strip-units($base);
+  }
+  @return ($pxval / $base) * 1em;
+}

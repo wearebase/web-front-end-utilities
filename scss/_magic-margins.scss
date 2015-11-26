@@ -1,0 +1,61 @@
+$grid-gutter-width: 20px !default;
+$magic-gutter: $grid-gutter-width / 2 !default;
+
+$magic-margin-gutters: 4 !default;
+$magic-padding-gutters: 4 !default;
+$magic-tablet-margin-gutters: 4 !default;
+$magic-tablet-padding-gutters: 4 !default;
+$magic-mobile-margin-gutters: 4 !default;
+$magic-mobile-padding-gutters: 4 !default;
+
+@for $i from 0 through $magic-margin-gutters {
+  .m#{$i}  { margin: $i * $magic-gutter; }
+  .mt#{$i} { margin-top: $i * $magic-gutter; }
+  .mr#{$i} { margin-right: $i * $magic-gutter; }
+  .mb#{$i} { margin-bottom: $i * $magic-gutter; }
+  .ml#{$i} { margin-left: $i * $magic-gutter; }
+}
+
+@for $i from 0 through $magic-padding-gutters {
+  .p#{$i}  { padding: $i * $magic-gutter; }
+  .pt#{$i} { padding-top: $i * $magic-gutter; }
+  .pr#{$i} { padding-right: $i * $magic-gutter; }
+  .pb#{$i} { padding-bottom: $i * $magic-gutter; }
+  .pl#{$i} { padding-left: $i * $magic-gutter; }
+}
+
+@include bootstrap-only-tablet {
+  @for $i from 0 through $magic-tablet-margin-gutters {
+    .t-m#{$i}  { margin: $i * $magic-gutter !important; }
+    .t-mt#{$i} { margin-top: $i * $magic-gutter !important; }
+    .t-mr#{$i} { margin-right: $i * $magic-gutter !important; }
+    .t-mb#{$i} { margin-bottom: $i * $magic-gutter !important; }
+    .t-ml#{$i} { margin-left: $i * $magic-gutter !important; }
+  }
+
+  @for $i from 0 through $magic-tablet-padding-gutters {
+    .t-p#{$i}  { padding: $i * $magic-gutter !important; }
+    .t-pt#{$i} { padding-top: $i * $magic-gutter !important; }
+    .t-pr#{$i} { padding-right: $i * $magic-gutter !important; }
+    .t-pb#{$i} { padding-bottom: $i * $magic-gutter !important; }
+    .t-pl#{$i} { padding-left: $i * $magic-gutter !important; }
+  }
+}
+
+@include bootstrap-only-mobile {
+  @for $i from 0 through $magic-mobile-margin-gutters {
+    .m-m#{$i}  { margin: $i * $magic-gutter !important; }
+    .m-mt#{$i} { margin-top: $i * $magic-gutter !important; }
+    .m-mr#{$i} { margin-right: $i * $magic-gutter !important; }
+    .m-mb#{$i} { margin-bottom: $i * $magic-gutter !important; }
+    .m-ml#{$i} { margin-left: $i * $magic-gutter !important; }
+  }
+
+  @for $i from 0 through $magic-mobile-padding-gutters {
+    .m-p#{$i}  { padding: $i * $magic-gutter !important; }
+    .m-pt#{$i} { padding-top: $i * $magic-gutter !important; }
+    .m-pr#{$i} { padding-right: $i * $magic-gutter !important; }
+    .m-pb#{$i} { padding-bottom: $i * $magic-gutter !important; }
+    .m-pl#{$i} { padding-left: $i * $magic-gutter !important; }
+  }
+}

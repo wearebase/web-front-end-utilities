@@ -1,0 +1,111 @@
+@mixin vendorize($property, $value){
+  -webkit-#{$property}: $value;
+  -moz-#{$property}: $value;
+  -ms-#{$property}: $value;
+  -o-#{$property}: $value;
+  #{$property}: $value; 
+}
+
+@mixin clear {
+  &:before, &:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  &:after {
+    clear: both;
+  }
+
+  // For IE 6/7 (trigger hasLayout)
+  .lte7 & {
+    *zoom:1;
+  }
+}
+
+// keyframes mixin
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content; 
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  } 
+}
+
+@mixin hide-text {
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+  }
+}
+
+// Convert pixels to ems
+// eg. for a relational value of 12px write em(12) when the parent is 16px
+// if the parent is another value say 24px write em(12, 24)
+
+$em-base: 14px;
+@function strip-units($val) {
+  @return ($val / ($val * 0 + 1));
+}
+
+@function em($pxval, $base: $em-base) {
+  @if not unitless($pxval) {
+    $pxval: strip-units($pxval);
+  }
+  @if not unitless($base) {
+    $base: strip-units($base);
+  }
+  @return ($pxval / $base) * 1em;
+}
+
+// Generate `:hover` and `:focus` styles in one go.
+@mixin hocus() {
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
+
+// Keep height equaling width with css
+// http://www.mademyday.de/css-height-equals-width-with-pure-css.html
+// Pass it dimensions (of an image, for example) or use 100 as the width and use a custom proportion.
+// Requires an absolute content inside.
+@mixin proportion($width, $height) {
+  position: relative;
+  width: 100%;
+
+  &:before {
+    content: "";
+    display: block;
+    padding-top: percentage($height / $width);
+  }
+}
+
+@mixin fontsizr($small, $medium, $large: false) {
+  font-size: $small;
+
+  @if $large {
+    @include bootstrap-only-desktop {
+      font-size: $large;
+    }
+
+    @include bootstrap-only-tablet {
+      font-size: $medium;
+    }
+  } @else {
+    @include bootstrap-only-tablet-desktop {
+      font-size: $medium;
+    }
+  }
+}

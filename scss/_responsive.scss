@@ -1,0 +1,109 @@
+// RESPONSIVE IMPLEMENTATION
+$screen-xs: 480px !default;
+$screen-sm: 768px !default;
+$screen-md: 992px !default;
+$screen-lg: 1200px !default;
+
+$xs-break: $screen-xs !default;
+$sm-break: $screen-sm !default;
+$md-break: $screen-md !default;
+$lg-break: $screen-lg !default;
+
+// Only on small devices
+@mixin only-xs {
+    @media only screen and (max-width: $xs-break) {
+        @content;
+    }    
+}
+
+// New Bootstrap Responsive Items, slowly transition to these
+@mixin bootstrap-only-mobile {
+    @media only screen and (max-width: $screen-sm - 1px) {
+        @content;
+    }
+}
+
+@mixin bootstrap-only-mobile-tablet {
+    @media only screen and (max-width: $screen-md - 1px) {
+        @content;
+    }
+}
+
+@mixin bootstrap-only-tablet {
+    @media only screen and (min-width: $screen-sm) and (max-width: $screen-md - 1px) {
+        @content;
+    }
+}
+
+@mixin bootstrap-only-tablet-desktop {
+    @media only screen and (min-width: $screen-sm) {
+        @content;
+    }
+}
+
+@mixin bootstrap-only-desktop {
+    @media only screen and (min-width: $screen-md) {
+        @content;
+    }
+}
+
+@mixin bootstrap-specific-desktop {
+    @media only screen and (min-width: $screen-md) and (max-width: $screen-lg) {
+        @content;
+    }
+}
+
+@mixin bootstrap-only-huge {
+    @media only screen and (min-width: $screen-lg) {
+        @content;
+    }
+}
+
+@mixin retina-query {
+    @media  (-webkit-min-device-pixel-ratio: 1.5),
+            (min--moz-device-pixel-ratio: 1.5),
+            (-o-min-device-pixel-ratio: 3 / 2),
+            (min-device-pixel-ratio: 1.5),
+            (min-resolution: 144dpi),
+            (min-resolution: 1.5dppx) { 
+        @content;
+    }
+}
+
+// ONLY Target SM Retina Devices
+@mixin retina-query-sm {
+    @media  (max-width: $sm-break) and (min-width: $xs-break+1px) and (-webkit-min-device-pixel-ratio: 1.5),
+            (max-width: $sm-break) and (min-width: $xs-break+1px) and (min--moz-device-pixel-ratio: 1.5),
+            (max-width: $sm-break) and (min-width: $xs-break+1px) and (-o-min-device-pixel-ratio: 3 / 2),
+            (max-width: $sm-break) and (min-width: $xs-break+1px) and (min-device-pixel-ratio: 1.5),
+            (max-width: $sm-break) and (min-width: $xs-break+1px) and (min-resolution: 144dpi), 
+            (max-width: $sm-break) and (min-width: $xs-break+1px) and (min-resolution: 1.5dppx) { 
+        @content;
+    }
+}
+
+
+// ONLY Target XS Retina Devices
+@mixin retina-query-xs {
+    @media  (max-width: $xs-break + 1px) and (-webkit-min-device-pixel-ratio: 1.5),
+            (max-width: $xs-break + 1px) and (min--moz-device-pixel-ratio: 1.5),
+            (max-width: $xs-break + 1px) and (-o-min-device-pixel-ratio: 3 / 2),
+            (max-width: $xs-break + 1px) and (min-device-pixel-ratio: 1.5),
+            (max-width: $xs-break + 1px) and (min-resolution: 144dpi), 
+            (max-width: $xs-break + 1px) and (min-resolution: 1.5dppx) { 
+        @content;
+    }
+}
+
+// ONLY Target XS Retina Devices up to iPhone 5 landscape, use carefully
+// This is done as landscape iphone 5 is wider than 480px ($sm-break)
+@mixin retina-query-i5 {
+    @media  (max-width: $iphone5width + 1px) and (-webkit-min-device-pixel-ratio: 1.5),
+            (max-width: $iphone5width + 1px) and (min--moz-device-pixel-ratio: 1.5),
+            (max-width: $iphone5width + 1px) and (-o-min-device-pixel-ratio: 3 / 2),
+            (max-width: $iphone5width + 1px) and (min-device-pixel-ratio: 1.5),
+            (max-width: $iphone5width + 1px) and (min-resolution: 144dpi),
+            (max-width: $iphone5width + 1px) and (min-resolution: 1.5dppx) { 
+        @content;
+    }
+}
