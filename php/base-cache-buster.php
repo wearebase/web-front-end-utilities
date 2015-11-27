@@ -1,6 +1,6 @@
 <?php
 
-function base_cache_buster_get_suffix()
+function base_cache_buster()
 {
     if (defined('ALWAYS_BUST_CACHE') && ALWAYS_BUST_CACHE) {
         // if in debug mode then make each request get the file from the server
@@ -21,5 +21,3 @@ function base_cache_buster_get_suffix()
 
     return 'bcb' . time();
 }
-
-return base_cache_buster_get_suffix();
