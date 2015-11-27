@@ -90,3 +90,76 @@ $em-base: 14px;
   }
   @return ($pxval / $base) * 1em;
 }
+
+@mixin clear {
+  &:before, &:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  &:after {
+    clear: both;
+  }
+
+  // For IE 6/7 (trigger hasLayout)
+  .lte7 & {
+    *zoom:1;
+  }
+}
+
+@mixin hide-text {
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+  }
+}
+
+// Generate `:hover` and `:focus` styles in one go.
+@mixin hocus() {
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
+
+// Keep height equaling width with css
+// http://www.mademyday.de/css-height-equals-width-with-pure-css.html
+// Pass it dimensions (of an image, for example) or use 100 as the width and use a custom proportion.
+// Requires a position:absolute content inside.
+@mixin proportion($width, $height) {
+  position: relative;
+  width: 100%;
+
+  &:before {
+    content: "";
+    display: block;
+    padding-top: percentage($height / $width);
+  }
+}
+
+@mixin fontsizer($small, $medium, $large: false) {
+  font-size: $small;
+
+  @if $large {
+    @include bootstrap-only-desktop {
+      font-size: $large;
+    }
+
+    @include bootstrap-only-tablet {
+      font-size: $medium;
+    }
+  } @else {
+    @include bootstrap-only-tablet-desktop {
+      font-size: $medium;
+    }
+  }
+}
+
+@mixin fontsizr($small, $medium, $large: false) {
+  @include fontsizer($small, $medium, $large);
+}

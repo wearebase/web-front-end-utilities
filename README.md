@@ -1,3 +1,6 @@
+# Info
+This project is a collection of useful utilities, applicable (and essential) to ANY web project. This includes Sass mixins and a PHP cachebuster. Wordpress utilities are not held in this project.
+
 # Install
 In your `composer.json`, add a new section for repositories:
 
@@ -38,63 +41,61 @@ If you do not specify this item in `composer.json` this utility will install to 
 
 # Enabling
 
-## Enabling Views
-First of all, you must add the views folder to your Twig template load path. You can either specify the views folder within this package or specify your whole third-party directory, which will affect the way you access your views. If you're using multiple Base packages, then the latter may be preferable.
-
-### Timber
-[Add the loadpath to your `functions.php`](https://github.com/jarednova/timber/wiki/Configure-template-locations). You may need to re-add the default Theme view folder in here too as it may override the Timber view folder.
-
-`
-/* functions.php */
-Timber::$locations = array(
-  '/package-install-dir',
-  ABSPATH.'/wp-content/themes/timber/views'
-);
-`
-
-### Enabling Macros
-In your layout file, or in individual macros or components:
-
-`{% import 'macros/base_images.twig' as base_image %}`
-
-With the path to the file and the variable you'd like to access it on.
+## Enabling PHP
+* `include_once` `base-cache-buster.php` to a variable and then echo that when you reference your scripts, CSS, favicon etc.
 
 ## Enabling Sass
 * Add the Sass to your build path
-* `@import "autoload"`. to get everything you need.
 * In your project variables, you can optionally add the following to override default values:
-    * `$base-lazy-transition-speed` (500ms)
+    * $grid-gutter-width
+    * $magic-gutter
+    * $magic-margin-gutters
+    * $magic-padding-gutters
+    * $magic-tablet-margin-gutters
+    * $magic-tablet-padding-gutters
+    * $magic-mobile-margin-gutters
+    * $magic-mobile-padding-gutters
 
-## Enabling JS
-* Add the JS file(s) to your page.
+Order of files:
+* Font Stack
+* - Your project setup file -
+* - Your bootstrap variables -
+* Responsive
+* Mixins
+* - Your Sass code -
+* Magic Margins
 
-## Enabling background-size.
-* Move the `background-size.min.htc` file to your webroot. A reference to a htc file *must* be absolute, so it is easiest to leave it just in the root.
+### Sass: What's included
 
-# What's included
+#### Mixins
+Provides a huge array of includes that will assist you in writing your CSS.
 
-* blazy, created by Bjørn Klinggaard.
-    * [Docs here](http://dinbror.dk/blog/blazy/).
-    * These files are held in this repo for simplicity as bLazy is not available on Composer and pulling it from npm or Bower is an added dependency. 
-    * I have also included a copy of the documentation as it is held on a private website which may be unavailable.
-* lazyLoad markup and scss to allow for full size backgrounds, images, and TimberImages
-* background-size.min.htc to allow for backwards compatibility of `background-size: cover;`
+Highlights include:
+* Pseudo-Element Generation
+* Magical Vertical-Align
+* hocus (hover + focus in one rule)
+* Proportion generator
+* Responsive font sizer - requires "responsive" file
 
-## LazyLoading
-* Activate bLazy with `var bLazy = new Blazy();`.
-* Revalidate bLazy (on a resize, for example) with `bLazy.revalidate();`.
-* Use `b-lazy` as a class on any div or img with a `data-src` to lazyLoad it. Preferably use the macros included in this package to enable the following:
-    * Lazy images, with optional support for retina
-    * Lazy TimberImages, with optional support for retina
-    * Lazy background (non-retina for this version)
-* All of the included functions include a `<noscript>` version for non-JS users.
+#### Responsive
+Responsive includes a bunch of responsive utilities for targeting bootstrap breakpoints - mobile, tablet, desktop, and large desktop. These will change based on your bootstrap config but will default to the bootstrap defaults if not provided.
 
-### lazy
-Bog standard lazy img. Pass it 1x (and 2x optional, or false), plus alt, classes, and the rest and it'll handle everything for you. There is also a standard 'img' macro if you need to use that instead of Lazy, which uses the same arguments as Lazy.
+Also provides mixins for retina devices, retina-sm, retina-xs, and iPhone 5's.
 
-### lazyTimberImage
-* Because TimberImage pulls in the width and height of the image, it can be used effectively to set the dimensions of an `<img>` before replacing the img with a 2x TimberImage version.
+Include this file *after* your bootstrap variables.
 
-### background
-* Use the included background macro to easily create a full size lazyloaded background. By default these will fade in, but you can disable that by adding `b-no-fade` class to backgrounds when triggering the macro.
-* A parent of a full size background must be relative, or use the `bg-parent` class.
+#### Font-Stack
+Include this file first in your Sass and you can use a whole load of font stacks. Totally optional but may be useful.
+
+#### Magic Margins
+Use classes like `mt4` to quickly add a margin top of 4 gutters to your item. The gutter is automatically pulled in if you're using bootstrap but defaults to 10px.
+
+Examples of classes:
+* `[type][direction][x]`: `type: p or m`, `direction: t r b l` of `x` gutters
+    * Examples: `pt2`, `mb0`, `mt2`, `pl2`
+* If direction is left empty then padding or margin will apply to all directions
+    * Examples: `m0`, `p1`, `p4`
+* Append `t-` to apply to tablets only (requires import of "responsive")
+* Append `m-` to apply to mobile only (requires import of "responsive")
+
+If you're referencing a gutter size that isn't being generated, simply adjust the variable for the amount of gutters you want. Gutters are generated from 0 up to the amount you specify.
