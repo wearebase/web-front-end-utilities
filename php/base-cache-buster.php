@@ -1,6 +1,6 @@
 <?php
 
-function base_cache_buster()
+function base_cacheBuster()
 {
     if (defined('ALWAYS_BUST_CACHE') && ALWAYS_BUST_CACHE) {
         // if in debug mode then make each request get the file from the server
