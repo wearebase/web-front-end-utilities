@@ -1,0 +1,80 @@
+// SPRITES SHOULD BE REFERENCED IN THE FOLLOWING WAY:
+// @include get-sprite($sprites-png, sprite-file-name);
+// Add no-repeat, false, false, if you don't wish to use the height and width.
+
+// http://compass-style.org/reference/compass/helpers/sprites/
+@mixin get-sprite($sprite, $map: $sprites-png, $repeat: no-repeat, $height: true, $width: true) {
+ 
+  //http://compass-style.org/reference/compass/helpers/sprites/#sprite-file
+  $sprite-image: sprite-file($map, $sprite);
+  
+  // http://compass-style.org/reference/compass/helpers/sprites/#sprite-url
+  $sprite-map: sprite-url($map);
+  
+  // http://compass-style.org/reference/compass/helpers/sprites/#sprite-position
+  $sprite-position: sprite-position($map, $sprite);
+  
+  // Returns background
+  background: $sprite-map $sprite-position $repeat;
+  
+  // http://compass-style.org/reference/compass/helpers/image-dimensions/
+  // Checks to see if the user wants height returned
+  @if $height == true {
+    // Gets the height of the sprite-image
+    $sprite-height: image-height($sprite-image);
+    // Returns the height
+    height: $sprite-height; }
+    
+  // http://compass-style.org/reference/compass/helpers/image-dimensions/
+  // Checks to see if the user wants height returned
+  @if $width == true {
+    // Gets the width of the sprite-image
+    $sprite-width: image-width($sprite-image);
+    // Returns the width
+    width: $sprite-width; }
+}
+
+////
+// Pseudo element helper
+//
+// Note IE7/6 doesn't understand pseudo element as ::before and ::after
+// IE8 need to have :before and not ::before
+// So use only : and not :: if you want to support IE8
+// IE9 Webkit Firefox Opera understand ::
+///
+
+// Helper for playing with pseudo element
+// $width: width of the pseudo element.
+// $height: height of the pseudo element.
+// $content: when playing with pseudo element, you mainly use `content: ""` (default value).
+// $position: when playing with pseudo element, you mainly use `position: absolute` (default value).
+// $display: when playing with pseudo element, you mainly use `display: block` (default value).
+@mixin pseudo-element($content: "", $position: absolute, $display: block)
+{
+    content: $content;
+    position: $position;
+    display: $display;
+}
+
+@mixin centre-sprite($sprite-name){
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-left:0 - (icons-sprite-width($sprite-name) / 2);
+  margin-top:0 - (icons-sprite-height($sprite-name) / 2);
+  // @include get-sprite($sprite-name, $sprites-png);
+}
+
+@mixin middle-sprite($sprite-name){
+  position:absolute;
+  top:50%;
+  margin-top:0 - (icons-sprite-height($sprite-name) / 2);
+  // @include get-sprite($sprite-name, $sprites-png);
+}
+
+@mixin align-centre-sprite($sprite-name){
+  position:absolute;
+  left:50%;
+  margin-left:0 - (icons-sprite-width($sprite-name) / 2);
+  // @include get-sprite($sprite-name, $sprites-png);
+}

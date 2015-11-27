@@ -1,0 +1,11 @@
+@include only-xs {
+  .col-xxs-6 {
+    width: 50%;
+  }
+
+  .col-xxs-12 {
+    width: 100%;
+  }
+
+  // @include make-grid(xxs);
+}

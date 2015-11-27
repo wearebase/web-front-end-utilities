@@ -45,7 +45,13 @@ If you do not specify this item in `composer.json` this utility will install to 
 * `include_once` `base-cache-buster.php` to a variable and then echo that when you reference your scripts, CSS, favicon etc.
 
 ## Enabling Sass
-* Add the Sass to your build path
+## Enabling Sass
+Add the Sass to your build path:
+
+```
+add_import_path "wp-content/themes/timber/packages"
+```
+
 * In your project variables, you can optionally add the following to override default values:
     * $grid-gutter-width
     * $magic-gutter
@@ -76,6 +82,8 @@ Highlights include:
 * hocus (hover + focus in one rule)
 * Proportion generator
 * Responsive font sizer - requires "responsive" file
+* Sprite mixins
+* Bonus Bootstraps!
 
 #### Responsive
 Responsive includes a bunch of responsive utilities for targeting bootstrap breakpoints - mobile, tablet, desktop, and large desktop. These will change based on your bootstrap config but will default to the bootstrap defaults if not provided.

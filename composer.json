@@ -1,6 +1,6 @@
 {
     "name": "wearebase/web-front-end-utilities",
-    "description": "Front End Utilities for Sass",
+    "description": "Essential Front End Utilities",
     "type": "craft-plugin",
     "require": {
         "composer/installers": "^1.0"
