@@ -1,0 +1,22 @@
+.visible-no-js,
+.visible-no-js-inline {
+  display: none !important;
+}
+
+html.no-js {
+  .visible-no-js {
+    display: block !important;
+  }
+
+  .visible-no-js-inline {
+    display: inline-block !important;
+  }
+
+  .visible-js {
+    display: none;
+  }
+
+  .hide-no-js {
+    display: none;
+  }
+}
