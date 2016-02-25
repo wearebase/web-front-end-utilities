@@ -42,16 +42,16 @@ If you do not specify this item in `composer.json` this utility will install to 
 # Enabling
 
 ## Enabling PHP
-* `include_once` `base-cache-buster.php` to a variable and then echo that when you reference your scripts, CSS, favicon etc.
+* `include_once __DIR__.'/base-cache-buster.php';` to a variable and then echo that when you reference your scripts, CSS, favicon etc.
 
-## Enabling Sass
-## Enabling Sass
-Add the Sass to your build path:
+## Sass
+### Enabling Sass
+Add the package to your Compass build path. In this example, I've imported all of the packages for this project.
 
 ```
 add_import_path "wp-content/themes/timber/packages"
 ```
-
+### Using Sass
 * In your project variables, you can optionally add the following to override default values:
     * $grid-gutter-width
     * $magic-gutter
