@@ -1,0 +1,40 @@
+.row--collapse {
+  > div {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.col--collapse {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+a.full-size {
+  display: block;
+  background-image: url('img/transparent.png'); // Hack for IE to recognise an absolute positioned transparent link
+}
+
+// Positioning Classes
+.p-bottom,
+.p-right,
+.p-left,
+.p-top {
+  position: absolute;
+}
+
+.p-bottom {
+  bottom: 0;
+}
+
+.p-right {
+  right: 0;
+}
+
+.p-top {
+  top: 0;
+}
+
+.p-left {
+  left: 0;
+}
