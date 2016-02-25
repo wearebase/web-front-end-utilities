@@ -1,17 +1,10 @@
+# Important note for Craft CMS users
+Because Composer doesn't let you install to a folder of your choice, at the current time we are hijacking the [composer/installers](https://github.com/composer/installers) package for 'Craft Plugins'. This means you must add an item to your composer.json to place it in a folder of your choice. This will only affect users who use Craft CMS.
+
 # Info
-This project is a collection of useful utilities, applicable (and essential) to ANY web project. This includes Sass mixins and a PHP cachebuster. Wordpress utilities are not held in this project.
+This project is a collection of useful utilities, applicable to any web project. This includes Sass mixins and a PHP cachebuster. Wordpress utilities are not held in this project.
 
 # Install
-In your `composer.json`, add a new section for repositories:
-
-```
-"repositories": [
-  { "type": "vcs", "url": "GIT-URL" }
-]
-```
-
-And add the url of this repository.
-
 Then include it in your composer:
 
 ```
@@ -30,7 +23,7 @@ In your `composer.json`, add the following:
 ```
 "extra": {
   "installer-paths": {
-    "src/components/{$name}": ["type:craft-plugin"]
+    "wp-content/themes/timber/packages/{$name}": ["type:craft-plugin"]
   }
 }
 ```
