@@ -35,7 +35,41 @@ If you do not specify this item in `composer.json` this utility will install to 
 # Enabling
 
 ## Enabling PHP
-* `include_once __DIR__.'/base-cache-buster.php';` to a variable and then echo that when you reference your scripts, CSS, favicon etc.
+
+### Cache Buster
+
+In function.php
+
+    require_once __DIR__.'/packages/web-front-end-utilities/vendor/autoload.php';
+
+The cacheBuster will check the environment for the variable BASE_CACHE_BUSTER, unless WP_ENV is defined and set to 'development' in which case it will use a timestamp. This leaves how the version is set when you deploy open to whatever deployment tool you are using, such as Trellis or Capistrano.
+
+        $cacheBuster = new Base\CacheBuster\CacheBuster();
+
+        try{
+            $context['cachebuster'] = $cacheBuster->getVersion();
+        } catch (VersionUnidentifiableException $e) {
+            $context['cachebuster'] = '<fallback>'
+        }
+
+The cacheBuster will throw a `VersionUnidentifiableException` if the environment is not set. You can add your own fallback if the cacheBuster fails to find an environment.
+ 
+ Alternately you can call `getVersionFromFallbackStrategies()` to attempt to find a version from a few known strategies of identifying a release file, from git or from the WordPress theme. This will use a timestamp if it finds no other version information.
+
+        try{
+            $context['cachebuster'] = $cacheBuster->getVersion();
+        } catch (VersionUnidentifiableException $e) {
+            $context['cachebuster'] = $cacheBuster->getVersionFromFallbackStrategies();
+        }
+        
+You can pass `getVersionFromFallbackStrategies()` an array of strategies in an order of your choosing. The default is below, and can be reduced and reordered.
+
+        $cacheBuster->getVersionFromFallbackStrategies([
+            new FileVersionIdentifier('version'),
+            new GitVersionIdentifier(),
+            new WordPressThemeVersionIdentifier(),
+            new TimestampVersionIdentifier()
+        ]);
 
 ## Sass
 ### Enabling Sass
