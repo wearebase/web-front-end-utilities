@@ -2,7 +2,7 @@
 Because Composer doesn't let you install to a folder of your choice, at the current time we are hijacking the [composer/installers](https://github.com/composer/installers) package for 'Craft Plugins'. This means you must add an item to your composer.json to place it in a folder of your choice. This will only affect users who use Craft CMS.
 
 # Info
-This project is a collection of useful utilities, applicable to any web project. This includes Sass mixins and a PHP cachebuster. Wordpress utilities are not held in this project.
+This project is a collection of useful utilities, applicable to any web project. This includes Sass mixins.
 
 # Install
 Then include it in your composer:
@@ -33,9 +33,6 @@ This plugin identifies itself as a `craft-plugin`. The addition above will send 
 If you do not specify this item in `composer.json` this utility will install to `craft/plugins/{$name}` as that is the default from `composer/installer` package.
 
 # Enabling
-
-## Enabling PHP
-* `include_once __DIR__.'/base-cache-buster.php';` to a variable and then echo that when you reference your scripts, CSS, favicon etc.
 
 ## Sass
 ### Enabling Sass
