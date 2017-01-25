@@ -2,6 +2,9 @@
     "name": "wearebase/web-front-end-utilities",
     "description": "Useful Front End Utilities",
     "license": "MIT",
+    "require": {
+        "composer/installers": "^1.0"
+    },
     "authors": [
         {
             "name": "Jonathan Ginn",
