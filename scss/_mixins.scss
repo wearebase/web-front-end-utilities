@@ -158,3 +158,10 @@ $em-base: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+// Detect IE10 and IE11
+@mixin ie() {
+    @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+        @content;
+    }
+}
