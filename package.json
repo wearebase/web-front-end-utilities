@@ -1,6 +1,6 @@
 {
   "name": "web-front-end-utilities",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "This project is a collection of useful utilities, applicable to any web project. This includes Sass mixins.",
   "main": "index.js",
   "scripts": {
