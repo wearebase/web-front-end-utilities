@@ -1,0 +1,19 @@
+{
+  "name": "web-front-end-utilities",
+  "version": "2.0.2",
+  "description": "This project is a collection of useful utilities, applicable to any web project. This includes Sass mixins.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wearebase/web-front-end-utilities.git"
+  },
+  "author": "Jonathan Ginn <jon@wearebase.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wearebase/web-front-end-utilities/issues"
+  },
+  "homepage": "https://github.com/wearebase/web-front-end-utilities#readme"
+}
